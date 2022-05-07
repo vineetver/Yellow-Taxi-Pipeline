@@ -13,14 +13,14 @@ def remove_fare_amount_with_zero_values(df: pd.DataFrame) -> pd.DataFrame:
     """
     This function removes rows with zero values.
     """
-    return df.loc[df['fare_amount'] > 0]
+    return df.loc[df['fare_amount'] > 0.0]
 
 
 def remove_trip_distance_with_zero_values(df: pd.DataFrame) -> pd.DataFrame:
     """
     This function removes rows with zero values.
     """
-    return df.loc[df['trip_distance'] > 0]
+    return df.loc[df['trip_distance'] > 0.0]
 
 
 def remove_out_of_range_data(df: pd.DataFrame, year: str = None, month: str = None) -> pd.DataFrame:
