@@ -9,7 +9,7 @@ def main():
     """
 
     # Read the data from the bucket
-    df = get_output_data('clean/2022_02', '20220507-010549')
+    df = get_output_data('data/clean/2022_02')
 
     # Generate the feature
     trip_features = feature_engineering.TripFeature().generate_feature(df)

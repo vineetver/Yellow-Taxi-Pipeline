@@ -156,9 +156,9 @@ def get_output_data(stage: str, version: str = None) -> pd.DataFrame:
     assert len(stage) > 0, 'Please provide a stage name to read from. (e.g. "clean", "preprocess")'
 
     if version is None:
-        version = get_latest_time_stamp(list_files('data'))
+        version = get_latest_time_stamp(list_files(stage))
 
-    output_path = f'gs://{BUCKET_NAME}/data/{stage}/{version}'
+    output_path = f'gs://{BUCKET_NAME}/{stage}/{version}'
     path = os.path.join(output_path + '.csv').replace('\\', '/')
 
     print(f'Current version: {version}')
