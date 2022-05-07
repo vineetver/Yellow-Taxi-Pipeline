@@ -24,7 +24,7 @@ class FeatureEngineer(ABC):
         self.column_name = column_name
 
     @abstractmethod
-    def generate_feature(self):
+    def generate_feature(self, *args, **kwargs):
         """
         Generate feature.
         """
@@ -38,7 +38,39 @@ class FeatureEngineer(ABC):
         pass
 
 
-class PickUpDateFeature(FeatureEngineer):
+class TripFeature(FeatureEngineer):
+    """
+    This class generates the features for the distance.
+    """
+
+    def __init__(self):
+        """
+        Initialize the class.
+        """
+        super().__init__('trip', ['trip_distance', 'tolls_amount', 'tpep_pickup_datetime', 'tpep_dropoff_datetime'])
+
+    def generate_feature(self, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Generate the feature.
+        """
+        df['trip_duration'] = (df['tpep_dropoff_datetime'] - df['tpep_pickup_datetime']).dt.total_seconds() / 60
+        df['trip_speed'] = df['trip_distance'] / df['trip_duration']
+        df['trip_tolls'] = df['tolls_amount']
+
+        return df[self.feature_dtype().keys()]
+
+    def feature_dtype(self):
+        """
+        indicates the dtype of the feature
+        """
+        return {
+            'trip_duration': np.int32,
+            'trip_speed'   : np.float32,
+            'trip_tolls'   : np.float32
+        }
+
+
+class TimeFeature(FeatureEngineer):
     """
     This class generates the features for the pick-up date.
     """
@@ -54,12 +86,12 @@ class PickUpDateFeature(FeatureEngineer):
         Generate the feature.
         """
 
-        df['pick_up_weekday'] = df.tpep_pickup_datetime.dt.dayofweek
-        df['pick_up_hour'] = df.tpep_pickup_datetime.dt.hour
-        df['pick_up_month'] = df.tpep_pickup_datetime.dt.month
-        df['pick_up_minute'] = df.tpep_pickup_datetime.dt.minute
+        df['pickup_weekday'] = df.tpep_pickup_datetime.dt.dayofweek
+        df['pickup_hour'] = df.tpep_pickup_datetime.dt.hour
+        df['pickup_month'] = df.tpep_pickup_datetime.dt.month
+        df['pickup_minute'] = df.tpep_pickup_datetime.dt.minute
 
-        df['work_hours'] = (df.pick_up_hour >= 8) & (df.pick_up_hour <= 18) & (df.pick_up_weekday < 5)
+        df['work_hours'] = (df['pickup_hour'] >= 8) & (df['pickup_hour'] <= 18) & (df['pickup_weekday'] < 5)
 
         return df[self.feature_dtype().keys()]
 
@@ -68,9 +100,76 @@ class PickUpDateFeature(FeatureEngineer):
         indicates the dtype of the feature
         """
         return {
-            'pick_up_weekday': np.int8,
-            'pick_up_hour'   : np.int8,
-            'pick_up_month'  : np.int8,
-            'pick_up_minute' : np.int8,
-            'work_hours'     : np.bool
+            'pickup_weekday': np.int8,
+            'pickup_hour'   : np.int8,
+            'pickup_month'  : np.int8,
+            'pickup_minute' : np.int8,
+            'work_hours'    : np.bool
+        }
+
+
+class MeterFeature(FeatureEngineer):
+    """
+    This class encodes the categorical features.
+    """
+
+    def __init__(self):
+        """
+        Initialize the class.
+        """
+        super().__init__('meter', ['PULocationID', 'DOLocationID'])
+
+    def generate_feature(self, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Generate the feature.
+        """
+        df['meter_eng'] = df['PULocationID']
+        df['meter_dis'] = df['DOLocationID']
+
+        return df[self.feature_dtype().keys()]
+
+    def feature_dtype(self):
+        """
+        indicates the dtype of the feature
+        """
+
+        return {
+            'meter_eng': np.int32,
+            'meter_dis': np.int32
+        }
+
+
+class TipFeature(FeatureEngineer):
+    """
+    This class encodes the categorical features.
+    """
+
+    def __init__(self):
+        """
+        Initialize the class.
+        """
+        super().__init__('tip', ['tip_amount', 'fare_amount'])
+
+    def generate_feature(self, df: pd.DataFrame, high_tip: float = 0.25) -> pd.DataFrame:
+        """
+        Generate the feature.
+        """
+
+        df['total_tip'] = df['tip_amount']
+        df['total_fare'] = df['fare_amount']
+        df['tip_percentage'] = df['total_tip'] / df['total_fare'] * 100
+
+        df['big_tip'] = df['tip_percentage'] > high_tip
+
+        return df[self.feature_dtype().keys()]
+
+    def feature_dtype(self):
+        """
+        indicates the dtype of the feature
+        """
+        return {
+            'total_tip'     : np.float32,
+            'total_fare'    : np.float32,
+            'tip_percentage': np.float32,
+            'big_tip'       : np.bool
         }

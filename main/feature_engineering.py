@@ -1,5 +1,6 @@
 from src.features import feature_engineering
 from src.data.create_dataset import get_output_data, write_output_data
+import pandas as pd
 
 
 def main():
@@ -11,7 +12,16 @@ def main():
     df = get_output_data('clean')
 
     # Generate the feature
-    df = feature_engineering.PickUpDateFeature().generate_feature(df)
+    trip_features = feature_engineering.TripFeature().generate_feature(df)
+
+    time_features = feature_engineering.TimeFeature().generate_feature(df)
+
+    meter_features = feature_engineering.MeterFeature().generate_feature(df)
+
+    tip_features = feature_engineering.TipFeature().generate_feature(df)
+
+    df = pd.concat([trip_features, time_features, meter_features, tip_features, df['tpep_pickup_datetime'].to_frame(),
+                    df['tpep_dropoff_datetime'].to_frame()], axis=1)
 
     # Write the feature to the bucket
     write_output_data(df, 'features', version='yes')
