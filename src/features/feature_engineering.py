@@ -53,8 +53,8 @@ class TripFeature(FeatureEngineer):
         """
         Generate the feature.
         """
-        df['trip_duration'] = (df['tpep_dropoff_datetime'] - df['tpep_pickup_datetime']).dt.total_seconds() / 60
-        df['trip_speed'] = df['trip_distance'] / df['trip_duration']
+        df['trip_duration'] = (df['tpep_dropoff_datetime'] - df['tpep_pickup_datetime']).dt.total_seconds()
+        df['trip_speed'] = df['trip_distance'] / df['trip_duration'] + 1000  ## add 1000 to avoid division by zero
         df['trip_tolls'] = df['tolls_amount']
 
         return df[self.feature_dtype().keys()]
