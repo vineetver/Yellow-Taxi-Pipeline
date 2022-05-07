@@ -2,3 +2,7 @@ pandas~=1.4.2
 numpy~=1.21.5
 matplotlib~=3.5.2
 scikit-learn~=1.0.2
+gcsfs~=2022.3.0
+jupyter~=1.0.0
+pyarrow~=7.0.0
+requests~=2.27.0
