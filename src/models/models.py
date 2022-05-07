@@ -3,13 +3,10 @@ from typing import Any, List
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.naive_bayes import GaussianNB
-from sklearn.neighbors import NearestCentroid
-from sklearn.ensemble import AdaBoostClassifier
-from sklearn.metrics import f1_score, plot_confusion_matrix
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.model_selection import StratifiedShuffleSplit, StratifiedKFold
+from sklearn.metrics import f1_score, confusion_matrix, ConfusionMatrixDisplay
+from sklearn.model_selection import StratifiedKFold
 
 
 class Model(ABC):
@@ -97,11 +94,27 @@ class GaussianNBModel(Model, ABC):
 
     def cross_validate(self, X, Y, n_splits: int = 10) -> List[tuple]:
         f1_scores = []
-        for train, test in StratifiedKFold(n_splits=n_splits).split(X, Y):
+        for fold, (train, test) in enumerate(StratifiedKFold(n_splits=n_splits).split(X, Y)):
+            print('=============================')
+            print(f'Fold: {fold}')
             x_train, x_test, y_train, y_test = X[train], X[test], Y[train], Y[test]
             self.fit(x_train, y_train)
-            f1_scores.append(self.evaluate(x_test, y_test))
+            score = self.evaluate(x_test, y_test)
+            print(f'F1 score: {score}')
+            f1_scores.append(score)
         return f1_scores
 
+    def plot_confusion_matrix(self, X, Y, normalize: str = None):
+        """
+        Plot the confusion matrix.
 
-
+        Args:
+            X: The data to predict on.
+            Y: The labels to compare against.
+            normalize: Whether to normalize the matrix e.g. 'true', 'pred', 'all' etc
+        """
+        y_pred = self.predict(X)
+        cm = confusion_matrix(Y, y_pred, normalize=normalize, labels=[True, False])
+        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=[True, False])
+        disp.plot(include_values=True, cmap='Blues')
+        plt.show()

@@ -157,7 +157,7 @@ class TipFeature(FeatureEngineer):
         df['total_fare'] = df['fare_amount']
         df['tip_percentage'] = df['total_tip'] / df['total_fare'] * 100
 
-        df['big_tip'] = df['tip_percentage'] > high_tip
+        df['big_tip'] = df['tip_percentage'] > (high_tip * 100)
 
         return df[self.feature_dtype().keys()]
 
