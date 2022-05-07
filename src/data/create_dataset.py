@@ -101,6 +101,8 @@ def get_output_path(stage: str, version: str = None) -> str:
 
     if version is not None:
         version = get_time_stamp()
+    else:
+        version = get_latest_time_stamp(list_files(output_path))
 
     path = os.path.join(output_path, version).replace('\\', '/')
 
