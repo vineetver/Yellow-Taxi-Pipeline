@@ -103,8 +103,5 @@ class GaussianNBModel(Model, ABC):
             f1_scores.append(self.evaluate(x_test, y_test))
         return f1_scores
 
-    def feature_importance(self, X, Y) -> pd.DataFrame:
-        model = self.model
-        feature_importance = pd.DataFrame(model.feature_importances_, index=self.features, columns=['importance'])
-        feature_importance.sort_values('importance', ascending=False, inplace=True)
-        return feature_importance
+
+
