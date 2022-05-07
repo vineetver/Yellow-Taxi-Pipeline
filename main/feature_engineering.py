@@ -9,7 +9,7 @@ def main():
     """
 
     # Read the data from the bucket
-    df = get_output_data('clean')
+    df = get_output_data('clean/2022_02', '20220507-010549')
 
     # Generate the feature
     trip_features = feature_engineering.TripFeature().generate_feature(df)
@@ -24,7 +24,7 @@ def main():
                     df['tpep_dropoff_datetime'].to_frame()], axis=1)
 
     # Write the feature to the bucket
-    write_output_data(df, 'features', version='yes')
+    write_output_data(df, 'features/2022_02', version='yes')
 
 
 if __name__ == '__main__':

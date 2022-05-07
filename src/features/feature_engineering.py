@@ -88,7 +88,6 @@ class TimeFeature(FeatureEngineer):
 
         df['pickup_weekday'] = df.tpep_pickup_datetime.dt.dayofweek
         df['pickup_hour'] = df.tpep_pickup_datetime.dt.hour
-        df['pickup_month'] = df.tpep_pickup_datetime.dt.month
         df['pickup_minute'] = df.tpep_pickup_datetime.dt.minute
 
         df['work_hours'] = (df['pickup_hour'] >= 8) & (df['pickup_hour'] <= 18) & (df['pickup_weekday'] < 5)
@@ -102,7 +101,6 @@ class TimeFeature(FeatureEngineer):
         return {
             'pickup_weekday': np.int8,
             'pickup_hour'   : np.int8,
-            'pickup_month'  : np.int8,
             'pickup_minute' : np.int8,
             'work_hours'    : np.bool
         }

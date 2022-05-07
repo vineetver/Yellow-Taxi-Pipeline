@@ -2,8 +2,8 @@ from src.data.create_dataset import read_data, write_output_data
 from src.features.data_cleaning import remove_rows_with_missing_values, remove_fare_amount_with_zero_values, \
     remove_trip_distance_with_zero_values, remove_out_of_range_data
 
-YEAR = '2020'
-MONTH = '08'
+YEAR = '2022'
+MONTH = '02'
 
 
 def main():
@@ -31,7 +31,7 @@ def main():
     df = remove_out_of_range_data(df, YEAR, MONTH)
 
     # Write the cleaned data to the bucket
-    write_output_data(df, 'clean', version='yes')
+    write_output_data(df, 'clean/2022_02', version='yes')
 
 
 if __name__ == '__main__':
