@@ -86,4 +86,13 @@ Million rows) and can take a while to download.
 ## Running the tests
 
     py.test tests
+    
+## License
+
+Distributed under the MIT License. See `LICENSE.md` for more information.
+
+
+## Contact
+
+Vineet Verma - vineetver@hotmail.com - [Goodbyeweekend.io](https://www.goodbyeweekend.io/)
 
