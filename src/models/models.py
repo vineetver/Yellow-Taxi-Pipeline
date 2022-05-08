@@ -65,13 +65,25 @@ class GaussianNBModel(Model, ABC):
     """Multinomial Naive Bayes model."""
 
     def __init__(self, features=None, label: str = None, params: dict = None):
-        """Initialize the model with the given features and params."""
+        """Initialize the model with the given features and params.
+        Args:
+            features: list of features to use.
+            label: label to use.
+            params: model parameters to use.
+        """
         if features is None:
             features = []
         super().__init__(features, label, params)
 
     def preprocess(self, df: pd.DataFrame) -> tuple[Any, Any]:
-        """Preprocess the dataframe."""
+        """Preprocess the dataframe.
+
+        Args:
+            df: dataframe to preprocess.
+        Returns:
+            X: features.
+            Y: labels.
+        """
         df.dropna(inplace=True)
         df = df[np.isfinite(df['trip_speed'])]  # drop rows with inf in trip_speed
         X = df[self.features].values
@@ -79,20 +91,53 @@ class GaussianNBModel(Model, ABC):
         return X, Y
 
     def fit(self, X, Y) -> GaussianNB:
+        """
+            Fit the model.
+        Args:
+            X: training features.
+            Y: training labels.
+        Returns:
+            model: the trained model.
+        """
         model = GaussianNB(**self.params)
         model.fit(X, Y)
         self.model = model
         return model
 
     def predict(self, X) -> np.ndarray:
+        """Predict the labels for the given data.
+        Args:
+            X: features to predict.
+        Returns:
+            labels: predicted labels.
+        """
         return self.model.predict(X)
 
     def evaluate(self, X, Y) -> tuple:
+        """Evaluate the model.
+        Args:
+            X: features to evaluate.
+            Y: labels to evaluate.
+        Returns:
+            accuracy: accuracy of the model.
+            precision: precision of the model.
+            recall: recall of the model.
+            f1: f1 of the model.
+        """
         y_pred = self.predict(X)
         f1 = f1_score(Y, y_pred)
         return f1
 
     def cross_validate(self, X, Y, n_splits: int = 10) -> List[tuple]:
+        """
+            Cross validate the model.
+        Args:
+            X:  testing features.
+            Y:  testing labels.
+            n_splits: number of K splits.
+        Returns:
+            scores: list of F1 scores.
+        """
         f1_scores = []
         for fold, (train, test) in enumerate(StratifiedKFold(n_splits=n_splits).split(X, Y)):
             print('=============================')
