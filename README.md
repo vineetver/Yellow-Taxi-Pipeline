@@ -18,7 +18,7 @@ taxi trip records include fields such as pickup and dropoff datetime, passenger 
 
 The data is stored in a private **Google Cloud Storage** bucket.
 
-| Field Name            | Description                                                                                                                                                                                                                                                 |
+| Column Name            | Description                                                                                                                                                                                                                                                 |
 |-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **VendorID**              | A code indicating the TPEP provider that provided the record. <br/> <strong>1= Creative Mobile Technologies, LLC; 2= VeriFone Inc.</strong>                                                                                                                 |
 | **tpep_pickup_datetime**  | The date and time when the meter was engaged.                                                                                                                                                                                                               |
@@ -67,7 +67,7 @@ Million rows) and can take a while to download.
 ```
 ## Model Wrapper
 
-`src/models/models.py` contains the wrapper for the models.
+`src/models/classifiers.py` contains the wrapper for the models.
 The wrapper is used to train the models and test the models.
 
 Here is the code for  an abstract class that implements the wrapper.
