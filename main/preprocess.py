@@ -1,5 +1,5 @@
-from src.data.create_dataset import read_data, write_output_data
-from src.features.data_cleaning import remove_rows_with_missing_values, remove_fare_amount_with_zero_values, \
+from src.dataset.create_dataset import read_data, write_output_data
+from src.feature.preprocessing import remove_rows_with_missing_values, remove_fare_amount_with_zero_values, \
     remove_trip_distance_with_zero_values, remove_out_of_range_data
 
 YEAR = '2022'

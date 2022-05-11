@@ -1,5 +1,5 @@
-from src.models import models
-from src.data.create_dataset import *
+from src.model import classifiers
+from src.dataset.create_dataset import get_output_data
 
 
 def main():
@@ -12,7 +12,7 @@ def main():
     features = list(train_df.columns.drop([label, 'tpep_pickup_datetime', 'tpep_dropoff_datetime']))
 
     # Initialize the model
-    model = models.GaussianNBModel(features=features, label=label)
+    model = classifiers.GaussianNBModel(features=features, label=label)
 
     # Split the data into train and test
     x_train, y_train = model.preprocess(train_df)
