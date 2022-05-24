@@ -15,7 +15,9 @@ setup(
         'gcsfs',
         'pyarrow',
         'requests',
-        'jupyter'],
+        'jupyter',
+        'seaborn',
+        'pyspark'],
     entry_points={
         'console_scripts': [
             'preprocess_data = main.preprocess:main',
