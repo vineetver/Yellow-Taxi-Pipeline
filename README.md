@@ -6,7 +6,7 @@ The task is to build a machine learning model that can predict whether a passeng
 make a large tip or not. A tip is significantly big if the tip is greater than 25% of the total fare. Since the target
 variable `big_tip (boolean)` is binary, it is a classification problem.
 
-The best model so far is `GaussianNB` with a 10-fold cross-validation **F1 score** of 82%.
+The best model so far is `GaussianNB` (baseline) with a 10-fold cross-validation **F1 score** of 82%. 
 
 I also explore to deploy and maintain the machine learning model in production.
 
