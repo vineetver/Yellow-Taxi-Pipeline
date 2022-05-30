@@ -68,7 +68,7 @@ Million rows each file) and can take a while to download and upload.
 ## Model Wrapper
 
 `src/models/classifiers.py` contains the wrapper for the models.
-The wrapper is used to train the models and test the models.
+The wrapper is used to train and test the models.
 
 Here is the code for  an abstract class that implements the wrapper.
 
