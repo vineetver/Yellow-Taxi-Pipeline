@@ -1,6 +1,6 @@
 <h2 align="center">Yellow Taxi Pipeline</h2>
 
-## Task Description
+## Description
 
 The task is to build a machine learning model that can predict whether a passenger of New York City's Yellow Taxi will
 make a large tip or not. A tip is significantly big if the tip is greater than 25% of the total fare. Since the target
