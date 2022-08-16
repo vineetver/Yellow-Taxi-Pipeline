@@ -40,9 +40,9 @@ The data is stored in a private **Google Cloud Storage** bucket.
 
 ## Google Cloud Storage 
 
-The data and all other files are stored in Google Cloud Storage bucket `yellow_taxi_data` in `us_east1` region. 
-Since the data is stored in GCS, it is accessible from anywhere in the world. Beware that the data is large (2 
-Million rows each file) and can take a while to download and upload.
+The data and all other files are stored in Google Cloud Storage bucket `yellow_taxi_data` in `us_east1` region. The data is loaded into a local PostgresQL
+database using the command line. Since the data is stored in GCS, it is accessible from anywhere in the world. Beware that the data is large (1 
+billion rows) and can take a while to download and upload.
 
 ```
 ├── vineet_taxi_data
@@ -65,6 +65,7 @@ Million rows each file) and can take a while to download and upload.
     ├── scratch        <- scratch space for intermediate data
     ├── tripdata       <- raw data from NYC Taxi & Limousine 
 ```
+
 ## Model Wrapper
 
 `src/models/classifiers.py` contains the wrapper for the models.
