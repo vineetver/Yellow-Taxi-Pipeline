@@ -1,0 +1,48 @@
+INSERT INTO trips
+(cab_type_id,
+ vendor_id,
+ pickup_datetime,
+ dropoff_datetime,
+ store_and_fwd_flag,
+ rate_code,
+ pickup_location,
+ dropoff_location,
+ passenger_count,
+ trip_distance,
+ fare_amount,
+ extra,
+ mta_tax,
+ tip_amount,
+ tolls_amount,
+ ehail_fee,
+ improvement_surcharge,
+ total_amount,
+ payment_type,
+ trip_type,
+ congestion_surcharge)
+SELECT cab_types.id,
+       vendor_id,
+       pickup_datetime::timestamp,
+       dropoff_datetime::timestamp,
+       store_and_fwd_flag,
+       rate_code::numeric::integer,
+       pickup_location::numeric::integer,
+       dropoff_location::numeric::integer,
+       passenger_count::numeric::integer,
+       trip_distance::numeric,
+       fare_amount::numeric,
+       extra::numeric,
+       mta_tax::numeric,
+       tip_amount::numeric,
+       tolls_amount::numeric,
+       ehail_fee::numeric,
+       improvement_surcharge::numeric,
+       total_amount::numeric,
+       payment_type,
+       trip_type::numeric::integer,
+       congestion_surcharge::numeric
+FROM green_tripdata_staging
+         INNER JOIN cab_types ON cab_types.type = 'green';
+
+TRUNCATE TABLE green_tripdata_staging;
+VACUUM ANALYZE green_tripdata_staging;
