@@ -2,18 +2,18 @@
 
 ## Description
 
-The task is to build a machine learning model that can predict whether a passenger of New York City's Yellow Taxi will
-make a large tip or not. A tip is significantly big if the tip is greater than 25% of the total fare. Since the target
-variable `big_tip (boolean)` is binary, it is a classification problem.
+An exploration of New York City's vernacular neighbourhoods, traffic, taxi usage, and more through a dataset of over 1 billion NYC Taxi trips.
+
+The New York City Taxi & Limousine Commission (TLC) regulates and licenses all taxi and for-hire vehicles in New York City. The TLC makes data on all taxi trips taken in New York City available to the public, and this dataset includes information on over 1.1 billion taxi trips in NYC from 2009 to 2022. The data is more than just a record of where people have been and when - it's a portrait of New York City and how it has changed over time. What months are the busiest for taxi usage? What are the most popular destinations? What are the most common pickup and drop-off locations? How bad is traffic in Manhattan, and how has it changed over time? What time do hedge fund managers hail their taxis? The dataset answers all these questions and many more.
+
+I also explore to deploy and maintain a machine learning model that can predict whether a passenger of New York City's Yellow Taxi will make a large tip or not. A tip is significantly big if the tip is greater than 25% of the total fare. Since the target variable `big_tip (boolean)` is binary, it is a classification problem.
 
 The best model so far is `GaussianNB` (baseline) with a 10-fold cross-validation **F1 score** of 82%. 
-
-I also explore to deploy and maintain the machine learning model in production.
 
 ## About the Data
 
 The data is from the [**NYC Yellow Taxi Data**](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page). The
-yellow taxi data is a collection of taxi trips taken by the city of New York City in the years 2009-2022. The yellow
+data is a collection of taxi trips taken by the city of New York City in the years 2014-2022. The yellow
 taxi trip records include fields such as pickup and dropoff datetime, passenger count, fare amount, etc.
 
 The data is stored in a private **Google Cloud Storage** bucket.
@@ -38,11 +38,11 @@ The data is stored in a private **Google Cloud Storage** bucket.
 | **Tolls_amount**          | Total amount of all tolls paid in trip.                                                                                                                                                                                                                     | 
 | **Total_amount**          | The total amount charged to passengers. Does not include cash tips.                                                                                                                                                                                         |
 
-## Google Cloud Storage 
+## Postgres and Google Cloud Storage
 
-The data and all other files are stored in Google Cloud Storage bucket `yellow_taxi_data` in `us_east1` region. The data is loaded into a local PostgresQL
-database using the command line. Since the data is stored in GCS, it is accessible from anywhere in the world. Beware that the data is large (1 
-billion rows) and can take a while to download and upload.
+The data is stored in a Postgresql Database for fast access. All the data from different stages of the pipeline e.g cleaning, processing is stored in Google Cloud. Since the data is stored in GCP, it is accessible from anywhere in the world. Beware that the data can be large (1 billion rows/200+ GB) and can take a while to download.
+
+Google Cloud data versioning structure.
 
 ```
 ├── vineet_taxi_data
