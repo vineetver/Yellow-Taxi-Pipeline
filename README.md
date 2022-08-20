@@ -137,11 +137,12 @@ class Model(ABC):
     $ git clone repo.git
     $ cd repo
 
-    load raw data -> clean data -> process data -> train model 
+    load raw data -> clean data -> process data -> train model -> evaluate
 
     $ python ./main/preprocess.py
     $ python ./main/feature_engineering.py
     $ python ./main/train_model.py
+    $ python ./main/evaluation.py
 
 ## Running the tests
 
