@@ -59,5 +59,3 @@ for filename in /Volumes/SSDT5/NYC-Trips/20*/Yellow/yellow_tripdata_*.csv; do
   psql new_york_trips -f schema/init_yellow.sql
   echo "$(date): done ${filename}"
 done
-
-psql new_york_trips -c "CREATE INDEX ON trips USING BRIN (pickup_datetime) WITH (pages_per_range = 32);"

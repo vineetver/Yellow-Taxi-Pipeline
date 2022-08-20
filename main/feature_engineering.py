@@ -22,7 +22,7 @@ def main():
 
     df = pd.concat([trip_features, time_features, meter_features, tip_features, df['tpep_pickup_datetime'].to_frame(),
                     df['tpep_dropoff_datetime'].to_frame()], axis=1)
-
+    
     # Write the feature to the bucket
     write_output_data(df, 'features/2014-2022', version='yes')
 
