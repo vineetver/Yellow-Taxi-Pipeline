@@ -4,8 +4,8 @@ from src.dataset.create_dataset import get_output_data
 
 def main():
     # e.g. load final dataframes from cloud (month 1 is for training, month 2 is for testing)
-    train_df = get_output_data('data/features/2022_01')
-    test_df = get_output_data('data/features/2022_02')
+    train_df = get_output_data('data/features/2014-2022')
+    test_df = get_output_data('data/features/2014-2022')
 
     # Choose the features and the label
     label = 'big_tip'
