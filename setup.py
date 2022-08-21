@@ -23,6 +23,7 @@ setup(
             'preprocess_data = main.preprocess:main',
             'feature_engineering = main.feature_engineering:main',
             'train_model = main.train_model:main',
+            'evaluation = main.evaluation:main',
         ],
     }
 )
