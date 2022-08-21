@@ -10,6 +10,10 @@ I also explore to deploy and maintain a machine learning model that can predict 
 
 The best model so far is `GaussianNB` (baseline) with a 10-fold cross-validation **F1 score** of 82%. 
 
+![download](https://user-images.githubusercontent.com/66165922/185767641-3170351a-e9e7-4b4d-b015-1aeb79b53b21.jpg)
+
+(Normalized)
+
 ## About the Data
 
 The data is from the [**NYC Yellow Taxi Data**](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page). The
@@ -137,11 +141,12 @@ class Model(ABC):
     $ git clone repo.git
     $ cd repo
 
-    load raw data -> clean data -> process data -> train model 
+    load raw data -> clean data -> process data -> train model -> evaluate
 
     $ python ./main/preprocess.py
     $ python ./main/feature_engineering.py
     $ python ./main/train_model.py
+    $ python ./main/evaluation.py
 
 ## Running the tests
 
