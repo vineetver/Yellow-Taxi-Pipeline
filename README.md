@@ -51,6 +51,30 @@ The following script can be used to populate the Database given all the data is 
    ```initialize.sh ```
 
  The directory `/schema` contains the schema for all the tables in the database.
+ 
+## Google Cloud data versioning structure.
+
+```
+├── vineet_taxi_data
+    ├── data           <- data from different stages of the pipeline e.g. clean, processed, etc.
+        ├── clean
+            ├── 2022_01
+                ├── 20220507-005720.csv
+                ├── 20220507-155720.csv
+            ├── 2022_02
+                ├── 20220507-005220.csv
+                ├── 20220507-156722.csv
+        
+        ├── processed
+            ├── 2022_01
+                    ├── 20220507-001972.csv
+                    ├── 20220507-191820.csv
+            ├── 2022_02
+                    ├── 20220507-009280.csv
+                    ├── 20220507-198222.csv     
+    ├── scratch        <- scratch space for intermediate data
+    ├── tripdata       <- raw data from NYC Taxi & Limousine 
+```
 
 ## Model Wrapper
 
@@ -120,15 +144,19 @@ class Model(ABC):
 
 ## Running the pipeline
 
+Before you run the pipeline PostgresQL must be populated with raw csv data. To do so please download the data from [**NYC Yellow Taxi Data**](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) and make proper changes to the `initialize.sh` script.
+
     $ git clone repo.git
     $ cd repo
-
-    load raw data -> clean data -> process data -> train model -> evaluate
+    
+    load raw data -> clean data -> process data -> train model -> evaluate -> deployment
 
     $ python ./main/preprocess.py
     $ python ./main/feature_engineering.py
     $ python ./main/train_model.py
     $ python ./main/evaluation.py
+    
+    $ python ./inference/inference.py 
 
 ## Running the tests
 
