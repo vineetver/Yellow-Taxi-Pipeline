@@ -42,33 +42,10 @@ The data is stored in a private **Google Cloud Storage** bucket.
 | **Tolls_amount**          | Total amount of all tolls paid in trip.                                                                                                                                                                                                                     | 
 | **Total_amount**          | The total amount charged to passengers. Does not include cash tips.                                                                                                                                                                                         |
 
-## Postgres and Google Cloud Storage
+## Postgres Database
 
-The data is stored in a Postgresql Database for fast access. All the data from different stages of the pipeline e.g cleaning, processing is stored in Google Cloud. Since the data is stored in GCP, it is accessible from anywhere in the world. Beware that the data can be large (1 billion rows/200+ GB) and can take a while to download.
+The data is stored in a Postgresql Database for fast access. All the data from different stages of the pipeline e.g cleaning, processing is stored in Database in tables with proper indexing. Since the data is stored in remote PostgresQL database, it is accessible from anywhere in the world. Beware that the data can be very large and can take a while to load.
 
-Google Cloud data versioning structure.
-
-```
-├── vineet_taxi_data
-    ├── data           <- data from different stages of the pipeline e.g. clean, processed, etc.
-        ├── clean
-            ├── 2022_01
-                ├── 20220507-005720.csv
-                ├── 20220507-155720.csv
-            ├── 2022_02
-                ├── 20220507-005220.csv
-                ├── 20220507-156722.csv
-        
-        ├── processed
-            ├── 2022_01
-                    ├── 20220507-001972.csv
-                    ├── 20220507-191820.csv
-            ├── 2022_02
-                    ├── 20220507-009280.csv
-                    ├── 20220507-198222.csv     
-    ├── scratch        <- scratch space for intermediate data
-    ├── tripdata       <- raw data from NYC Taxi & Limousine 
-```
 
 ## Model Wrapper
 
