@@ -46,6 +46,11 @@ The data is stored in a private **Google Cloud Storage** bucket.
 
 The data is stored in a Postgresql Database for fast access. All the data from different stages of the pipeline e.g cleaning, processing is stored in Database in tables with proper indexing. Since the data is stored in remote PostgresQL database, it is accessible from anywhere in the world. Beware that the data can be very large and can take a while to load.
 
+The following script can be used to populate the Database given all the data is downloaded and converted into CSV. 
+
+   ```initialize.sh ```
+
+ The directory `/schema` contains the schema for all the tables in the database.
 
 ## Model Wrapper
 
