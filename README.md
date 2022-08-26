@@ -14,6 +14,13 @@ The best model so far is `GaussianNB` (baseline) with a 10-fold cross-validation
 
 (Normalized)
 
+
+## General Architecture 
+
+<img width="738" alt="data" src="https://user-images.githubusercontent.com/66165922/187005406-b321a675-70a8-46d2-b15c-46e70b058d42.png">
+
+
+
 ## About the Data
 
 The data is from the [**NYC Yellow Taxi Data**](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page). The
@@ -54,6 +61,7 @@ The following script can be used to populate the Postgres Database given all the
  
 Airbyte is used to schedule data transfer data from PostgreSQL into BigQuery.
 
+![airbyte](https://user-images.githubusercontent.com/66165922/187005305-8482a50f-61b1-4908-8c21-fbbf7d9753a4.png)
 
 ## Model Wrapper
 
