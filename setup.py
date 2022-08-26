@@ -1,29 +1,18 @@
-from setuptools import setup, find_packages
+from pathlib import Path
+from setuptools import find_namespace_packages, setup
+
+BASE_DIR = Path(__file__).parent
+with open(Path(BASE_DIR, "requirements.txt"), "r") as file:
+    required_packages = [ln.strip() for ln in file.readlines()]
 
 setup(
-    name='Yellow_Taxi_Pipeline',
+    name='YellowTaxiPipeline',
     version='0.1',
-    description='This package contains the code for the Yellow Taxi Pipeline',
+    description='Machine learning pipeline to analyze 1B+ NYC Taxi Trips',
     author='Vineet Verma',
     author_email='vineetver@hotmail.com',
-    packages=find_packages(exclude=['tests']),
-    install_requires=[
-        'pandas',
-        'numpy',
-        'matplotlib',
-        'scikit-learn',
-        'gcsfs',
-        'pyarrow',
-        'requests',
-        'jupyter',
-        'seaborn',
-        'pyspark'],
-    entry_points={
-        'console_scripts': [
-            'preprocess_data = main.preprocess:main',
-            'feature_engineering = main.feature_engineering:main',
-            'train_model = main.train_model:main',
-            'evaluation = main.evaluation:main',
-        ],
-    }
+    url="https://github.com/vineetver/Yellow-Taxi-Pipeline",
+    python_requires='>=3.7',
+    packages=find_namespace_packages(exclude=['test']),
+    install_requires=[required_packages],
 )

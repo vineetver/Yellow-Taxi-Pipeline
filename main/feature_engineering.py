@@ -2,7 +2,6 @@ from src.feature import feature_selection
 from src.dataset.create_dataset import get_output_data, write_output_data
 import pandas as pd
 
-
 def main():
     """
     This function reads the cleaned data from the bucket and generates the features
