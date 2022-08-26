@@ -128,12 +128,11 @@ Before you run the pipeline PostgresQL must be populated with raw csv data. To d
     $ git clone repo.git
     $ cd repo
     
-    load raw data -> clean data -> process data -> train model -> evaluate -> deployment
+    load raw data -> clean data -> process data -> train model -> deployment
 
     $ python ./main/preprocess.py
     $ python ./main/feature_engineering.py
     $ python ./main/train_model.py
-    $ python ./main/evaluation.py
     
     $ python ./inference/inference.py 
 
